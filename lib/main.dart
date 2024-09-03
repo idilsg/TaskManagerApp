@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:taskmanagerapp/pages/loginpage.dart';
+import 'package:taskmanagerapp/pages/taskspage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginPage(),
+      home: TasksPage(), // test için değiştiriyorum, sonra burayı düzelt
     );
   }
 }
