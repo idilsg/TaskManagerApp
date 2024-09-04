@@ -1,14 +1,37 @@
 import 'package:flutter/material.dart';
-
-// bu dosya ekranın altındaki bar için
-// sırasıyla "görevler sayfası", "görev ekleme", "akış" olacak
-// görevlerde, görev detaylarında ve akışta olacak
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:taskmanagerapp/pages/tasks.dart';
+import 'package:taskmanagerapp/pages/addedittask.dart';
+import 'package:taskmanagerapp/pages/timeline.dart';
 
 class BottomBar extends StatelessWidget {
-  const BottomBar({super.key});
+  final int selectedIndex;
+
+  const BottomBar({super.key, this.selectedIndex = 0});
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return BottomAppBar(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          _buildIconButton(context, 'assets/icons/tasksicon.svg', 0, TasksPage()),
+          _buildIconButton(context, 'assets/icons/pluswithborder.svg', 1, AddEditTaskPage()),
+          _buildIconButton(context, 'assets/icons/timelineicon.svg', 2, TimelinePage()),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildIconButton(BuildContext context, String assetName, int index, Widget targetScreen) {
+    return IconButton(
+      icon: SvgPicture.asset(assetName,),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => targetScreen),
+        );
+      },
+    );
   }
 }
