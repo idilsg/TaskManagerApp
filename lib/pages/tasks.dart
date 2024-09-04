@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:taskmanagerapp/widgets/bottombar.dart';
-import 'package:taskmanagerapp/widgets/openprofile.dart';
 
 // adminlerde değişiklikler olacak
 
