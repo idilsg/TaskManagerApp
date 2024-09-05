@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: TasksPage(), // test için değiştiriyorum, sonra burayı düzelt
+      home: const TasksPage(), // test için değiştiriyorum, sonra burayı düzelt
     );
   }
 }

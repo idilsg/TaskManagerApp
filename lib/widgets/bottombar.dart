@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:taskmanagerapp/pages/tasks.dart';
-import 'package:taskmanagerapp/pages/addedittask.dart';
+import 'package:taskmanagerapp/pages/addtask.dart';
 import 'package:taskmanagerapp/pages/timeline.dart';
 
 class BottomBar extends StatelessWidget {
@@ -15,9 +15,9 @@ class BottomBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          _buildIconButton(context, 'assets/icons/tasksicon.svg', 0, TasksPage()),
-          _buildIconButton(context, 'assets/icons/pluswithborder.svg', 1, AddEditTaskPage()),
-          _buildIconButton(context, 'assets/icons/timelineicon.svg', 2, TimelinePage()),
+          _buildIconButton(context, 'assets/icons/tasksicon.svg', 0, const TasksPage()),
+          _buildIconButton(context, 'assets/icons/pluswithborder.svg', 1, const AddTaskPage()),
+          _buildIconButton(context, 'assets/icons/profilepage.svg', 2, const TimelinePage()),
         ],
       ),
     );

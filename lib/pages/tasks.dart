@@ -10,13 +10,13 @@ class TasksPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tasks'),
+        title: const Text('Tasks'),
       ),
-      body: Center(
+      body: const Center(
         child: Text('burada görevler olacak'),
       ),
-      bottomNavigationBar: BottomBar(
-        selectedIndex: 0, // tasks ikonu seçili
+      bottomNavigationBar: const BottomBar(
+        selectedIndex: 0,
       ),
     );
   }
