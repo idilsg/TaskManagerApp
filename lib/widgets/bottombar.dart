@@ -19,15 +19,15 @@ class BottomBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          _buildIconButton(context, 'assets/icons/tasksicon.svg', 0, const TasksPage()),
-          _buildIconButton(context, 'assets/icons/pluswithborder.svg', 1, const AddTaskPage()),
-          _buildIconButton(context, 'assets/icons/profilepage.svg', 2, const ProfilePage()),
+          _iconButton(context, 'assets/icons/tasksicon.svg', 0, const TasksPage()),
+          _iconButton(context, 'assets/icons/pluswithborder.svg', 1, const AddTaskPage()),
+          _iconButton(context, 'assets/icons/profilepage.svg', 2, const ProfilePage()),
         ],
       ),
     );
   }
 
-  Widget _buildIconButton(BuildContext context, String assetName, int index, Widget targetScreen) {
+  Widget _iconButton(BuildContext context, String assetName, int index, Widget targetScreen) {
     return IconButton(
       icon: SvgPicture.asset(
         assetName,

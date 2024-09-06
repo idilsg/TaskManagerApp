@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:taskmanagerapp/widgets/bottombar.dart';
 
 // ekle ve düzenlede sadece ufak farklılıklar olacak onun dışında aynı
 // update: ekleye çevirdim
