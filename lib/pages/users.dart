@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// tüm kullanıcıların gözükeceği sayfa
 // sadece adminlerde
 
 class UsersPage extends StatelessWidget {

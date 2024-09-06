@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-// ekle ve düzenlede sadece ufak farklılıklar olacak onun dışında aynı
-// update: ekleye çevirdim
-// if else ile halledilir diye düşünüyorum
-// update: gerek kalmadı
+// görev ekleme sayfası, bottom bar'daki ikinci sayfa
 
 class AddTaskPage extends StatelessWidget {
   const AddTaskPage ({super.key});

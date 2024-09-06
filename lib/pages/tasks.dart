@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:taskmanagerapp/widgets/bottombar.dart';
 
+// görevlerin  gözükebileceği, bottom bar'daki ilk sayfa
 // adminlerde değişiklikler olacak
 
 class TasksPage extends StatelessWidget {

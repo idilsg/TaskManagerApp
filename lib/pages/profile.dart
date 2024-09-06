@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:taskmanagerapp/widgets/bottombar.dart';
 
+// profil sayfası, bottom bar'daki üçüncü sayfa
+
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 

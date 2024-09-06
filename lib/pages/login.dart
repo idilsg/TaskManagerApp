@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-// şifreyi göster kısmı eklenecek
+// ilk ekran
+// şifreyi göster kısmı eklenebilir
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
