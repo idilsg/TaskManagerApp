@@ -8,6 +8,8 @@ class EditTaskPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return const Scaffold(
+      backgroundColor: Color(0xFFF5F5F7),
+    );
   }
 }
