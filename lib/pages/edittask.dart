@@ -24,6 +24,8 @@ class EditTaskPage extends StatelessWidget {
             TaskName(),
             SizedBox(height: 16),
             TaskDescription(),
+            SizedBox(height: 16), // buraya takvim gelecek
+            TaskPriority(),
           ],
         ),
       ),
@@ -134,6 +136,91 @@ class TaskDescription extends StatelessWidget {
             maxLines: 4,
           ),
         )
+      ],
+    );
+  }
+}
+
+class TaskPriority extends StatefulWidget {
+  const TaskPriority({super.key});
+
+  @override
+  _TaskPriorityState createState() => _TaskPriorityState();
+}
+
+class _TaskPriorityState extends State<TaskPriority> {
+  int selectedIndex = -1; // başlangıçta hiçbir seçenek seçilmemiş olacak
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const Padding(
+          padding: EdgeInsets.only(left: 6.0),
+          child: Text(
+            'Öncelik',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        const SizedBox(height: 4),
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 1.5,
+                blurRadius: 4,
+              ),
+            ],
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Row(
+            children: List.generate(3, (index) {
+              return Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selectedIndex = index; // seçilen indeks güncelleniyor
+                    });
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: selectedIndex == index
+                          ? Color(0xFFE47000).withOpacity(0.6) // seçilen butonun rengi
+                          : Colors.white, // seçilmeyen butonun rengi
+                      borderRadius: index == 0
+                          ? const BorderRadius.only(
+                              topLeft: Radius.circular(12),
+                              bottomLeft: Radius.circular(12),
+                            )
+                          : index == 2
+                              ? const BorderRadius.only(
+                                  topRight: Radius.circular(12),
+                                  bottomRight: Radius.circular(12),
+                                )
+                              : null,
+                    ),
+                    child: Center(
+                      child: Text(
+                        ['Düşük', 'Orta', 'Yüksek'][index],
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            }),
+          ),
+        ),
       ],
     );
   }
