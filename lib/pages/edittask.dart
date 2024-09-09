@@ -12,7 +12,7 @@ class EditTaskPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F7),
       appBar: AppBar(
-        title: const Text('Task Details'),
+        title: const Text('Görevi Düzenle'),
         centerTitle: true,
         backgroundColor: const Color(0xFFF5F5F7),
       ),
@@ -24,8 +24,18 @@ class EditTaskPage extends StatelessWidget {
             TaskName(),
             SizedBox(height: 16),
             TaskDescription(),
-            SizedBox(height: 16), // buraya takvim gelecek
+            SizedBox(height: 16),
+            // buraya takvim gelecek
+            // SizedBox(height: 16),
             TaskPriority(),
+            SizedBox(height: 16),
+            // buraya kategori gelecek
+            // SizedBox(height: 16),
+            // buraya kişiler gelecek
+            // SizedBox(height: 16),
+            ProgressandStatus(),
+            // SizedBox(height: 16), 
+            // buraya kaydet gelecek
           ],
         ),
       ),
@@ -192,7 +202,7 @@ class _TaskPriorityState extends State<TaskPriority> {
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
                       color: selectedIndex == index
-                          ? Color(0xFFE47000).withOpacity(0.6) // seçilen butonun rengi
+                          ? const Color(0xFFE47000).withOpacity(0.6) // seçilen butonun rengi
                           : Colors.white, // seçilmeyen butonun rengi
                       borderRadius: index == 0
                           ? const BorderRadius.only(
@@ -220,6 +230,158 @@ class _TaskPriorityState extends State<TaskPriority> {
               );
             }),
           ),
+        ),
+      ],
+    );
+  }
+}
+
+class ProgressandStatus extends StatefulWidget {
+  const ProgressandStatus({super.key});
+
+  @override
+  _ProgressandStatusState createState() => _ProgressandStatusState();
+}
+
+class _ProgressandStatusState extends State<ProgressandStatus> {
+  bool isStatusSelected = false;
+  final TextEditingController _progressController = TextEditingController();
+
+  @override
+  void dispose() {
+    _progressController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Row(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.only(left: 6.0),
+                child: Text(
+                  'İlerleme',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(width: 16),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.only(left: 12.0),
+                child: Text(
+                  'Durum',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+        
+        const SizedBox(height: 8),
+
+        Row(
+          children: <Widget>[
+            // İlerleme
+            Expanded(
+              child: Container(
+                height: 50,
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 1.5,
+                      blurRadius: 4,
+                    ),
+                  ],
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center, 
+                  crossAxisAlignment: CrossAxisAlignment.center, 
+                  children: <Widget>[
+                    const Text(
+                      '%',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    SizedBox(
+                      width: 50,
+                      child: TextField(
+                        controller: _progressController,
+                        keyboardType: TextInputType.number,
+                        textAlign: TextAlign.center, 
+                        maxLength: 3,
+                        decoration: const InputDecoration(
+                          isDense: true,
+                          contentPadding: EdgeInsets.symmetric(vertical: 12),
+                          hintText: '0',
+                          border: InputBorder.none,
+                          counterText: '',
+                        ),
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ),
+                  ],
+                ),
+
+              ),
+            ),
+
+            const SizedBox(width: 55),
+
+            // Durum
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    isStatusSelected = !isStatusSelected;
+                  });
+                },
+                child: Container(
+                  height: 50,
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: isStatusSelected 
+                    ? const Color(0xFFE47000).withOpacity(0.6) 
+                    : Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 1.5,
+                        blurRadius: 4,
+                      ),
+                    ],
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      'Ertelendi',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ],
     );
