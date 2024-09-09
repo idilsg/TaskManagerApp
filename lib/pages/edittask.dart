@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+//import 'package:intl/intl.dart';
 
 // görev detaylarından düzenleye girince açılacak görev düzenleme sayfası
 // seçtiğin görevin bilgileri gözükecek. üstüne düzenleme yapabileceksin
@@ -38,26 +39,47 @@ class TaskName extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Text(
-          'Görev İsmi',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
+        const Padding(
+          padding: EdgeInsets.only(left: 6.0),
+          child:Text(
+            'Görev İsmi',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         const SizedBox(height: 4),
-        TextField(
-          //color: Colors.white,
-          decoration: InputDecoration(
-            border: const OutlineInputBorder(),
-            hintText: 'ismi buraya yazın',
-            hintStyle: TextStyle(
-              color: Colors.grey[400],
-              fontSize: 14
-            )
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 1.5,
+                blurRadius: 4,
+              ),
+            ],
+            borderRadius: BorderRadius.circular(12),
           ),
-          maxLines: 1,
-        ),
+          child: TextField(
+            //color: Colors.white,
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.white,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide.none,
+              ),
+              hintText: 'Görev ismini yazınız',
+              hintStyle: TextStyle(
+                color: Colors.grey[400],
+                fontSize: 14
+              )
+            ),
+            maxLines: 1,
+          ),
+        )
       ],
     );
   }
@@ -71,25 +93,47 @@ class TaskDescription extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Text(
-          'Görev Açıklaması',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
+        const Padding(
+          padding: EdgeInsets.only(left: 6.0),
+          child:Text(
+            'Görev Açıklaması',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         const SizedBox(height: 4),
-        TextField(
-          decoration: InputDecoration(
-            border: const OutlineInputBorder(),
-            hintText: 'açıklamayı buraya yazın',
-            hintStyle: TextStyle(
-              color: Colors.grey[400],
-              fontSize: 14
-            )
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 1.5,
+                blurRadius: 4,
+              ),
+            ],
+            borderRadius: BorderRadius.circular(12),
           ),
-          maxLines: 4,
-        ),
+          child: TextField(
+            //color: Colors.white,
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.white,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide.none,
+              ),
+              hintText: 'Görev açıklamasını yazınız',
+              hintStyle: TextStyle(
+                color: Colors.grey[400],
+                fontSize: 14
+              )
+            ),
+            maxLines: 4,
+          ),
+        )
       ],
     );
   }
