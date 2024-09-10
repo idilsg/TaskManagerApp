@@ -36,17 +36,10 @@ class BottomBar extends StatelessWidget {
         // colorFilter: const ColorFilter.mode(Color(0xFFF5F5F7), BlendMode.srcIn),
       ),
       onPressed: () {
-        if (usePushReplacement) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => targetScreen),
-          );
-        } else {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => targetScreen),
-          );
-        }
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => targetScreen),
+        );
       },
     );
   }

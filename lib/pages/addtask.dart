@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:taskmanagerapp/pages/tasks.dart';
-import 'package:taskmanagerapp/widgets/bottombar.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 //import 'package:intl/intl.dart';
 
 // düzenleme sayfasının boş hali olacak
@@ -16,6 +15,13 @@ class AddTaskPage extends StatelessWidget {
         title: const Text('Görev Ekle'),
         centerTitle: true,
         backgroundColor: const Color(0xFFF5F5F7),
+        elevation: 0,
+        leading: IconButton(
+          icon: SvgPicture.asset('assets/icons/gobackarrow.svg', height: 24.0, width: 24.0),
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, '/tasks');
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.only(
@@ -72,10 +78,7 @@ class AddTaskPage extends StatelessWidget {
                 ),
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => const TasksPage()),
-                    );
+                    Navigator.pushReplacementNamed(context, '/tasks');
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.transparent,
