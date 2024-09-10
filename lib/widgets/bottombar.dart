@@ -19,15 +19,15 @@ class BottomBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          _iconButton(context, 'assets/icons/tasksicon.svg', 0, const TasksPage()),
-          _iconButton(context, 'assets/icons/pluswithborder.svg', 1, const AddTaskPage()),
-          _iconButton(context, 'assets/icons/profilepage.svg', 2, const ProfilePage()),
+          _iconButton(context, 'assets/icons/tasksicon.svg', 0, const TasksPage(), true),
+          _iconButton(context, 'assets/icons/pluswithborder.svg', 1, const AddTaskPage(), false),
+          _iconButton(context, 'assets/icons/profilepage.svg', 2, const ProfilePage(), true),
         ],
       ),
     );
   }
 
-  Widget _iconButton(BuildContext context, String assetName, int index, Widget targetScreen) {
+  Widget _iconButton(BuildContext context, String assetName, int index, Widget targetScreen, bool usePushReplacement){
     return IconButton(
       icon: SvgPicture.asset(
         assetName,
@@ -36,10 +36,17 @@ class BottomBar extends StatelessWidget {
         // colorFilter: const ColorFilter.mode(Color(0xFFF5F5F7), BlendMode.srcIn),
       ),
       onPressed: () {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => targetScreen),
-        );
+        if (usePushReplacement) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => targetScreen),
+          );
+        } else {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => targetScreen),
+          );
+        }
       },
     );
   }
