@@ -16,8 +16,35 @@ class TasksPage extends StatelessWidget {
         centerTitle: true,
         backgroundColor: const Color(0xFFF5F5F7),
       ),
-      body: const Center(
-        child: Text('burada görevler olacak'),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/taskdetails');
+              },
+              child: Container(
+                height: 100, 
+                width: double.infinity, 
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12.0), 
+                ),
+                child: const Center(
+                  child: Text(
+                    'Görev Örneği',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: const BottomBar(
         selectedIndex: 0,
