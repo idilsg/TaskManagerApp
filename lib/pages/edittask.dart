@@ -341,7 +341,7 @@ class _ProgressandStatusState extends State<ProgressandStatus> {
           ],
         ),
         
-        const SizedBox(height: 8),
+        const SizedBox(height: 4),
 
         Row(
           children: <Widget>[
