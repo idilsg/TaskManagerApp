@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taskmanagerapp/pages/tasks.dart';
 //import 'package:intl/intl.dart';
 
 // görev detaylarından düzenleye girince açılacak görev düzenleme sayfası
@@ -16,30 +17,82 @@ class EditTaskPage extends StatelessWidget {
         centerTitle: true,
         backgroundColor: const Color(0xFFF5F5F7),
       ),
-      body: const SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            TaskName(),
-            SizedBox(height: 16),
-            TaskDescription(),
-            SizedBox(height: 16),
-            // buraya takvim gelecek
-            // SizedBox(height: 16),
-            TaskPriority(),
-            SizedBox(height: 16),
-            // buraya kategori gelecek
-            // SizedBox(height: 16),
-            // buraya kişiler gelecek
-            // SizedBox(height: 16),
-            ProgressandStatus(),
-            // SizedBox(height: 16), 
-            // buraya kaydet gelecek
-          ],
+      body: Padding(
+        padding: const EdgeInsets.only(
+          left: 32, 
+          right: 32,
+          top: 16,
+          bottom: 16
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              const TaskName(),
+              const SizedBox(height: 16),
+              const TaskDescription(),
+              const SizedBox(height: 16),
+              // buraya takvim gelecek
+              // SizedBox(height: 16),
+              const TaskPriority(),
+              const SizedBox(height: 16),
+              // buraya kategori gelecek
+              // SizedBox(height: 16),
+              // buraya kişiler gelecek
+              // SizedBox(height: 16),
+              const ProgressandStatus(),
+              const SizedBox(height: 32), 
+              saveButton(context),
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  Center saveButton(BuildContext context) {
+    return Center(
+            child: SizedBox(
+              width: double.infinity,
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFFE47000), Colors.orange],
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
+                  ),
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 1.5,
+                      blurRadius: 4,
+                    ),
+                  ],
+                ),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => const TasksPage()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.transparent,
+                    shadowColor: Colors.transparent,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                  ),
+                  child: const Text('Kaydet', 
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    )
+                  ),
+                ),
+              ),
+            ),
+          );
   }
 }
 
@@ -275,7 +328,7 @@ class _ProgressandStatusState extends State<ProgressandStatus> {
             SizedBox(width: 16),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.only(left: 12.0),
+                padding: EdgeInsets.only(left: 22.0),
                 child: Text(
                   'Durum',
                   style: TextStyle(
