@@ -32,8 +32,10 @@ class TaskBox extends StatelessWidget {
         Navigator.pushNamed(context, '/taskdetails');
       },
       child: Container(
-        height: 100,
-        width: double.infinity,
+        constraints: const BoxConstraints(
+          maxWidth: double.infinity,
+          minHeight: 100,
+        ),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(12.0),
@@ -41,48 +43,53 @@ class TaskBox extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    taskName,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    'Bitiş Tarihi: $deadline',
-                    style: const TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.normal,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Row(
-                    children: [
-                      const Text(
-                        'Öncelik: ',
-                        style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.normal,
-                        ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      taskName,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
                       ),
-                      Text(
-                        priority,
-                        style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                          color: priorityColor,
-                        ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'Bitiş Tarihi: $deadline',
+                      style: const TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.normal,
                       ),
-                    ],
-                  ),
-                ],
+                    ),
+                    const SizedBox(height: 4),
+                    Row(
+                      children: [
+                        const Text(
+                          'Öncelik: ',
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                        Text(
+                          priority,
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                            color: priorityColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
               CircularPercentIndicator(
                 radius: 30.0,
