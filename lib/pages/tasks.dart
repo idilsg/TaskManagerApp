@@ -15,10 +15,10 @@ class TasksPage extends StatelessWidget {
         backgroundColor: const Color(0xFFF5F5F7),
         automaticallyImplyLeading: false,
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          children: [
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ListView(
+          children: const [
             TaskBox(
               taskName: 'Görev 1',
               deadline: '14 Eylül 2024',
@@ -38,6 +38,41 @@ class TasksPage extends StatelessWidget {
               deadline: '30 Eylül 2024',
               priority: 'Düşük',
               progress: 0.75,
+            ),
+            SizedBox(height: 16),
+            TaskBox(
+              taskName: 'Görev 4',
+              deadline: '5 Ekim 2024',
+              priority: 'Yüksek',
+              progress: 0.60,
+            ),
+            SizedBox(height: 16),
+            TaskBox(
+              taskName: 'Görev 5',
+              deadline: '14 Eylül 2024',
+              priority: 'Yüksek',
+              progress: 0.25,
+            ),
+            SizedBox(height: 16),
+            TaskBox(
+              taskName: 'Görev 6',
+              deadline: '21 Eylül 2024',
+              priority: 'Orta',
+              progress: 0.50,
+            ),
+            SizedBox(height: 16),
+            TaskBox(
+              taskName: 'Görev 7',
+              deadline: '30 Eylül 2024',
+              priority: 'Düşük',
+              progress: 0.75,
+            ),
+            SizedBox(height: 16),
+            TaskBox(
+              taskName: 'Görev 8',
+              deadline: '5 Ekim 2024',
+              priority: 'Yüksek',
+              progress: 0.60,
             ),
           ],
         ),
