@@ -10,7 +10,7 @@ class TasksPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F7),
       appBar: AppBar(
-        title: const Text('Tasks'),
+        title: const Text('Görevler'),
         centerTitle: true,
         backgroundColor: const Color(0xFFF5F5F7),
         automaticallyImplyLeading: false,

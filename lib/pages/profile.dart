@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:taskmanagerapp/pages/users.dart';
 import 'package:taskmanagerapp/widgets/bottombar.dart';
+import 'package:flutter_svg/flutter_svg.dart'; // Import this for SVG support
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -13,6 +15,17 @@ class ProfilePage extends StatelessWidget {
         centerTitle: true,
         backgroundColor: const Color(0xFFF5F5F7),
         automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+            icon: SvgPicture.asset('assets/users.svg'), // Path to your users.svg asset
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const UsersPage()),
+              );
+            },
+          ),
+        ],
       ),
       body: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 40.0),

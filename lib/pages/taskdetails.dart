@@ -21,7 +21,7 @@ class TaskDetailsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F7),
       appBar: AppBar(
-        title: const Text('Task Details'),
+        title: const Text('Görev Detayları'),
         centerTitle: true,
         backgroundColor: const Color(0xFFF5F5F7),
         actions: [
