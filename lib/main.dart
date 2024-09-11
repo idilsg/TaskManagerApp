@@ -27,7 +27,11 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const TasksPage(), // test için değiştiriyorum, login olacak
         '/tasks': (context) => const TasksPage(),
-        '/taskdetails': (context) => const TaskDetailsPage(),
+        '/taskdetails': (context) => const TaskDetailsPage(
+          taskName: 'Görev Adı',
+          deadline: 'Bitiş Tarihi',
+          priority: 'Öncelik',
+        ),
         '/addtask': (context) => const AddTaskPage(),
         '/edittask': (context) => const EditTaskPage(),
         '/profile': (context) => const ProfilePage(),

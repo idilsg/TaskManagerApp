@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:taskmanagerapp/pages/taskdetails.dart';
 
 class TaskBox extends StatelessWidget {
   final String taskName;
@@ -28,8 +29,17 @@ class TaskBox extends StatelessWidget {
     }
 
     return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, '/taskdetails');
+       onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => TaskDetailsPage(
+              taskName: taskName,
+              deadline: deadline,
+              priority: priority,
+            ),
+          ),
+        );
       },
       child: Container(
         constraints: const BoxConstraints(

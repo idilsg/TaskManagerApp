@@ -1,11 +1,20 @@
+// task_details_page.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:taskmanagerapp/widgets/bottombar.dart';
-
-// göreve basınca detayları çıkacak sayfa
+import 'package:taskmanagerapp/widgets/taskdetailsw.dart';
 
 class TaskDetailsPage extends StatelessWidget {
-  const TaskDetailsPage({super.key});
+  final String taskName;
+  final String deadline;
+  final String priority;
+
+  const TaskDetailsPage({
+    Key? key,
+    required this.taskName,
+    required this.deadline,
+    required this.priority,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +35,10 @@ class TaskDetailsPage extends StatelessWidget {
           ),
         ],
       ),
-      body: const Center(
-        child: Text('Burada görev detayları olacak'),
+      body: TaskDetailsWidget(  // TaskDetailsWidget'i kullan
+        taskName: taskName,
+        deadline: deadline,
+        priority: priority,
       ),
       bottomNavigationBar: const BottomBar(
         selectedIndex: 0,
