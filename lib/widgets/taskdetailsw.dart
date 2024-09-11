@@ -7,11 +7,11 @@ class TaskDetailsWidget extends StatelessWidget {
   final String priority;
 
   const TaskDetailsWidget({
-    Key? key,
+    super.key,
     required this.taskName,
     required this.deadline,
     required this.priority,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,3 @@
-// task_details_page.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:taskmanagerapp/widgets/bottombar.dart';
@@ -10,11 +9,11 @@ class TaskDetailsPage extends StatelessWidget {
   final String priority;
 
   const TaskDetailsPage({
-    Key? key,
+    super.key,
     required this.taskName,
     required this.deadline,
     required this.priority,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +34,7 @@ class TaskDetailsPage extends StatelessWidget {
           ),
         ],
       ),
-      body: TaskDetailsWidget(  // TaskDetailsWidget'i kullan
+      body: TaskDetailsWidget(
         taskName: taskName,
         deadline: deadline,
         priority: priority,
