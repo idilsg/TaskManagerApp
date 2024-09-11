@@ -13,6 +13,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   http: ^1.2.2
   intl: ^0.17.0
+  percent_indicator: ^4.2.3
 
 
 dev_dependencies:

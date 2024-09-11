@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:taskmanagerapp/widgets/bottombar.dart';
-
-// görevlerin  gözükebileceği, bottom bar'daki ilk sayfa
-// adminlerde değişiklikler olacak
+import 'package:taskmanagerapp/widgets/taskbox.dart';
 
 class TasksPage extends StatelessWidget {
   const TasksPage({super.key});
@@ -15,40 +13,36 @@ class TasksPage extends StatelessWidget {
         title: const Text('Tasks'),
         centerTitle: true,
         backgroundColor: const Color(0xFFF5F5F7),
+        automaticallyImplyLeading: false,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: const Padding(
+        padding: EdgeInsets.all(16.0),
         child: Column(
           children: [
-            GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, '/taskdetails');
-              },
-              child: Container(
-                height: 100, 
-                width: double.infinity, 
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12.0), 
-                ),
-                child: const Center(
-                  child: Text(
-                    'Görev Örneği',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
+            TaskBox(
+              taskName: 'Görev 1',
+              deadline: '14 Eylül 2024',
+              priority: 'Yüksek',
+              progress: 0.25,
+            ),
+            SizedBox(height: 16),
+            TaskBox(
+              taskName: 'Görev 2',
+              deadline: '21 Eylül 2024',
+              priority: 'Orta',
+              progress: 0.50,
+            ),
+            SizedBox(height: 16),
+            TaskBox(
+              taskName: 'Görev 3',
+              deadline: '30 Eylül 2024',
+              priority: 'Düşük',
+              progress: 0.75,
             ),
           ],
         ),
       ),
-      bottomNavigationBar: const BottomBar(
-        selectedIndex: 0,
-      ),
+      bottomNavigationBar: const BottomBar(selectedIndex: 0),
     );
   }
 }

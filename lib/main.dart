@@ -7,7 +7,6 @@ import 'package:taskmanagerapp/pages/addtask.dart';
 import 'package:taskmanagerapp/pages/profile.dart';
 import 'package:taskmanagerapp/pages/users.dart';
 import 'package:taskmanagerapp/pages/taskfilter.dart';
-import 'package:taskmanagerapp/pages/edituser.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,10 +23,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // home: const EditTaskPage(), // test için değiştiriyorum, login olacak
       initialRoute: '/',
       routes: {
-        '/': (context) => const LoginPage(), // login olacak
+        '/': (context) => const TasksPage(), // test için değiştiriyorum, login olacak
         '/tasks': (context) => const TasksPage(),
         '/taskdetails': (context) => const TaskDetailsPage(),
         '/addtask': (context) => const AddTaskPage(),
@@ -35,7 +33,6 @@ class MyApp extends StatelessWidget {
         '/profile': (context) => const ProfilePage(),
         '/users': (context) => const UsersPage(),
         '/taskfilter': (context) => const TaskFilterPage(),
-        '/edituser': (context) => const EditUserPage(),
         '/login': (context) => const LoginPage(),
       },
     );

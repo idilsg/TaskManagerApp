@@ -128,9 +128,7 @@ class LoginPage extends StatelessWidget {
 
               // giriş yap butonu
               ElevatedButton(
-                onPressed: () {
-                  Navigator.pushReplacementNamed(context, '/tasks');
-                },
+                onPressed: () {Navigator.pushReplacementNamed(context, '/tasks');},                
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white, 
                   backgroundColor: const Color(0xFFE47000), 
