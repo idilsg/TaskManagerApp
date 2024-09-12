@@ -1,4 +1,3 @@
-// task_details_widget.dart
 import 'package:flutter/material.dart';
 
 class TaskDetailsWidget extends StatelessWidget {

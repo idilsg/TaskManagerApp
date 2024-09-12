@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:taskmanagerapp/pages/tasks.dart';
-//import 'package:intl/intl.dart';
 
 // görev detaylarından düzenleye girince açılacak görev düzenleme sayfası
 // seçtiğin görevin bilgileri gözükecek. üstüne düzenleme yapabileceksin
