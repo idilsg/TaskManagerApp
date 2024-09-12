@@ -27,11 +27,11 @@ Once the app is running, you can:
 ## Project Structure
 
 lib/
-- main.dart           : *Entry point of the application*
-- models/             : *Contains data models*
-- pages/              : *Contains the UI pages*
-- widgets/            : *Custom widgets used across the app*
-- services/           : *Business logic and API services*
+- main.dart           :*Entry point of the application*
+- models/             :*Contains data models*
+- pages/              :*Contains the UI pages*
+- widgets/            :*Custom widgets used across the app*
+- services/           :*Business logic and API services*
 
 
 ## Technologies Used
