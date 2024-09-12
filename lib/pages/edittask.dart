@@ -4,8 +4,37 @@ import 'package:taskmanagerapp/pages/tasks.dart';
 // görev detaylarından düzenleye girince açılacak görev düzenleme sayfası
 // seçtiğin görevin bilgileri gözükecek. üstüne düzenleme yapabileceksin
 
-class EditTaskPage extends StatelessWidget {
+class EditTaskPage extends StatefulWidget {
   const EditTaskPage({super.key});
+
+  @override
+  _EditTaskPageState createState() => _EditTaskPageState();
+}
+
+class _EditTaskPageState extends State<EditTaskPage> {
+  final TextEditingController _startDateController = TextEditingController();
+  final TextEditingController _endDateController = TextEditingController();
+
+  Future<void> _selectDate(BuildContext context, TextEditingController controller) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2010),
+      lastDate: DateTime(2100),
+    );
+    if (picked != null) {
+      setState(() {
+        controller.text = "${picked.day}/${picked.month}/${picked.year}";
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _startDateController.dispose();
+    _endDateController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +60,8 @@ class EditTaskPage extends StatelessWidget {
               const SizedBox(height: 16),
               const TaskDescription(),
               const SizedBox(height: 16),
-              // buraya takvim gelecek
-              // SizedBox(height: 16),
+              dates(context),
+              const SizedBox(height: 16),
               const TaskPriority(),
               const SizedBox(height: 16),
               // buraya kategori gelecek
@@ -46,6 +75,88 @@ class EditTaskPage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Row dates(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: GestureDetector(
+            onTap: () => _selectDate(context, _startDateController),
+            child: Container(
+              height: 50,
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 1.5,
+                    blurRadius: 4,
+                  ),
+                ],
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Row(
+                children: [
+                  const Icon(Icons.calendar_today, color: Colors.grey),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: TextField(
+                      controller: _startDateController,
+                      decoration: const InputDecoration(
+                        hintText: 'Başlangıç Tarihi',
+                        border: InputBorder.none,
+                      ),
+                      enabled: false,
+                      style: const TextStyle(fontSize: 14),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: GestureDetector(
+            onTap: () => _selectDate(context, _endDateController),
+            child: Container(
+              height: 50,
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 1.5,
+                    blurRadius: 4,
+                  ),
+                ],
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Row(
+                children: [
+                  const Icon(Icons.calendar_today, color: Colors.grey),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: TextField(
+                      controller: _endDateController,
+                      decoration: const InputDecoration(
+                        hintText: 'Bitiş Tarihi',
+                        border: InputBorder.none,
+                      ),
+                      enabled: false,
+                      style: const TextStyle(fontSize: 14),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
