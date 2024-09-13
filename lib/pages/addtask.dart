@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:taskmanagerapp/models/userinfos.dart';
+import 'package:taskmanagerapp/models/category.dart';
+import 'package:taskmanagerapp/widgets/selectableitemrow.dart';
 
 // düzenleme sayfasının boş hali olacak
 
@@ -13,6 +16,8 @@ class AddTaskPage extends StatefulWidget {
 class _AddTaskPageState extends State<AddTaskPage> {
   final TextEditingController _startDateController = TextEditingController();
   final TextEditingController _endDateController = TextEditingController();
+  List<Category> selectedCategories = [];
+  List<User> selectedUsers = [];
 
   Future<void> _selectDate(BuildContext context, TextEditingController controller) async {
     final DateTime? picked = await showDatePicker(
@@ -65,10 +70,40 @@ class _AddTaskPageState extends State<AddTaskPage> {
               const SizedBox(height: 16),
               const TaskPriority(),
               const SizedBox(height: 16),
-              // buraya kategori gelecek
-              // SizedBox(height: 16),
-              // buraya kişiler gelecek
-              // SizedBox(height: 16),
+              SelectableItemRow<Category>(
+                title: 'Kategori Seç',
+                items: categories,
+                selectedItems: selectedCategories,
+                onItemSelected: (Category category) {
+                  setState(() {
+                    selectedCategories.add(category);
+                  });
+                },
+                onItemRemoved: (Category category) {
+                  setState(() {
+                    selectedCategories.remove(category);
+                  });
+                },
+                allowAddingNew: true,
+              ),
+              const SizedBox(height: 16),
+              SelectableItemRow<User>(
+                title: 'Kişi Seç',
+                items: users,
+                selectedItems: selectedUsers,
+                onItemSelected: (User user) {
+                  setState(() {
+                    selectedUsers.add(user);
+                  });
+                },
+                onItemRemoved: (User user) {
+                  setState(() {
+                    selectedUsers.remove(user);
+                  });
+                },
+                allowAddingNew: false,
+              ),
+              const SizedBox(height: 16),
               const ProgressandStatus(),
               const SizedBox(height: 32), 
               addButton(context),
