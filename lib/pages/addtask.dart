@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:taskmanagerapp/models/category.dart';
+import 'package:taskmanagerapp/models/userinfos.dart';
+import 'package:taskmanagerapp/widgets/selectableitemrow.dart';
 
 // düzenleme sayfasının boş hali olacak
 
@@ -13,6 +16,8 @@ class AddTaskPage extends StatefulWidget {
 class _AddTaskPageState extends State<AddTaskPage> {
   final TextEditingController _startDateController = TextEditingController();
   final TextEditingController _endDateController = TextEditingController();
+  List<User> selectedUsers = [];
+  List<Category> selectedCategories = [];
 
   Future<void> _selectDate(BuildContext context, TextEditingController controller) async {
     final DateTime? picked = await showDatePicker(
@@ -65,10 +70,18 @@ class _AddTaskPageState extends State<AddTaskPage> {
               const SizedBox(height: 16),
               const TaskPriority(),
               const SizedBox(height: 16),
-              // buraya kategori gelecek
-              // SizedBox(height: 16),
-              // buraya kişiler gelecek
-              // SizedBox(height: 16),
+              buildSelectableSection(
+                "Kategoriler",
+                selectedCategories.map((category) => category.name).toList(),
+                () => _selectCategory(context),
+              ),
+              const SizedBox(height: 16),
+              buildSelectableSection(
+                "Kişiler",
+                selectedUsers.map((user) => user.name).toList(),
+                () => _selectUsers(context),
+              ),
+              const SizedBox(height: 16),
               const ProgressandStatus(),
               const SizedBox(height: 32), 
               addButton(context),
@@ -79,86 +92,91 @@ class _AddTaskPageState extends State<AddTaskPage> {
     );
   }
 
+  
+
   Row dates(BuildContext context) {
     return Row(
       children: [
         Expanded(
           child: GestureDetector(
             onTap: () => _selectDate(context, _startDateController),
-            child: Container(
-              height: 50,
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 1.5,
-                    blurRadius: 4,
-                  ),
-                ],
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Row(
-                children: [
-                  const Icon(Icons.calendar_today, color: Colors.grey),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: TextField(
-                      controller: _startDateController,
-                      decoration: const InputDecoration(
-                        hintText: 'Başlangıç Tarihi',
-                        border: InputBorder.none,
-                      ),
-                      enabled: false,
-                      style: const TextStyle(fontSize: 14),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            child: buildDateContainer(_startDateController, 'Başlangıç Tarihi'),
           ),
         ),
         const SizedBox(width: 16),
         Expanded(
           child: GestureDetector(
             onTap: () => _selectDate(context, _endDateController),
-            child: Container(
-              height: 50,
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 1.5,
-                    blurRadius: 4,
-                  ),
-                ],
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Row(
-                children: [
-                  const Icon(Icons.calendar_today, color: Colors.grey),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: TextField(
-                      controller: _endDateController,
-                      decoration: const InputDecoration(
-                        hintText: 'Bitiş Tarihi',
-                        border: InputBorder.none,
-                      ),
-                      enabled: false,
-                      style: const TextStyle(fontSize: 14),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            child: buildDateContainer(_endDateController, 'Bitiş Tarihi'),
           ),
         ),
       ],
     );
+  }
+
+  Container buildDateContainer(TextEditingController controller, String hint) {
+    return Container(
+      height: 50,
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 1.5,
+            blurRadius: 4,
+          ),
+        ],
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.calendar_today, color: Colors.grey),
+          const SizedBox(width: 8),
+          Expanded(
+            child: TextField(
+              controller: controller,
+              decoration: InputDecoration(
+                hintText: hint,
+                border: InputBorder.none,
+              ),
+              enabled: false,
+              style: const TextStyle(fontSize: 14),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildSelectableSection(String title, List<String> selectedItems, Function onPressed) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 4),
+        SelectableItemRow(
+          items: selectedItems,
+          onPressed: onPressed,
+        ),
+      ],
+    );
+  }
+
+  void _selectCategory(BuildContext context) async {
+    // Burada kategorileri seçebileceğin bir ekran açılır
+    // Örneğin bir modal ile kategori seçip, listeye ekleyebilirsin
+  }
+
+  void _selectUsers(BuildContext context) async {
+    // Burada kullanıcıları seçebileceğin bir ekran açılır
+    // Seçilen kullanıcılar selectedUsers listesine eklenir
   }
 
   Center addButton(BuildContext context) {
