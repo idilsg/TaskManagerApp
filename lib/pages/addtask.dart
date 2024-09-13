@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:taskmanagerapp/models/userinfos.dart';
 import 'package:taskmanagerapp/models/category.dart';
-import 'package:taskmanagerapp/widgets/selectableitemrow.dart';
+//import 'package:taskmanagerapp/widgets/selectableitemrow.dart';
 import 'package:taskmanagerapp/widgets/selectablecategoryrow.dart';
 
 // düzenleme sayfasının boş hali olacak
@@ -362,6 +362,23 @@ class TaskPriority extends StatefulWidget {
 class _TaskPriorityState extends State<TaskPriority> {
   int selectedIndex = -1; // başlangıçta hiçbir seçenek seçilmemiş olacak
 
+  // Öncelik seviyesine göre renkleri tanımlıyoruz
+  Color getButtonColor(int index) {
+    if (selectedIndex == index) {
+      switch (index) {
+        case 0:
+          return Colors.lightGreen.withOpacity(0.6); // Düşük: Açık yeşil
+        case 1:
+          return Colors.orange.withOpacity(0.6); // Orta: Açık turuncu
+        case 2:
+          return Colors.redAccent.withOpacity(0.6); // Yüksek: Açık kırmızı
+        default:
+          return Colors.white;
+      }
+    }
+    return Colors.white; // Seçilmeyen butonun rengi
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -402,20 +419,18 @@ class _TaskPriorityState extends State<TaskPriority> {
                   child: Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: selectedIndex == index
-                          ? const Color(0xFFE47000).withOpacity(0.6) // seçilen butonun rengi
-                          : Colors.white, // seçilmeyen butonun rengi
+                      color: getButtonColor(index), // Seçilen butona göre renk değişiyor
                       borderRadius: index == 0
+                        ? const BorderRadius.only(
+                          topLeft: Radius.circular(12),
+                          bottomLeft: Radius.circular(12),
+                        )
+                        : index == 2
                           ? const BorderRadius.only(
-                              topLeft: Radius.circular(12),
-                              bottomLeft: Radius.circular(12),
+                              topRight: Radius.circular(12),
+                              bottomRight: Radius.circular(12),
                             )
-                          : index == 2
-                              ? const BorderRadius.only(
-                                  topRight: Radius.circular(12),
-                                  bottomRight: Radius.circular(12),
-                                )
-                              : null,
+                          : null,
                     ),
                     child: Center(
                       child: Text(
@@ -559,7 +574,7 @@ class _ProgressandStatusState extends State<ProgressandStatus> {
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     color: isStatusSelected 
-                    ? const Color(0xFFE47000).withOpacity(0.6) 
+                    ? Colors.blue[200]
                     : Colors.white,
                     boxShadow: [
                       BoxShadow(

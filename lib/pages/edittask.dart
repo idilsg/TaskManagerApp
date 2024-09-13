@@ -1,19 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:taskmanagerapp/pages/tasks.dart';
+import 'package:taskmanagerapp/models/userinfos.dart';
+import 'package:taskmanagerapp/models/category.dart';
+//import 'package:taskmanagerapp/widgets/selectableitemrow.dart';
+import 'package:taskmanagerapp/widgets/selectablecategoryrow.dart';
 
-// görev detaylarından düzenleye girince açılacak görev düzenleme sayfası
-// seçtiğin görevin bilgileri gözükecek. üstüne düzenleme yapabileceksin
+// düzenleme sayfası
 
 class EditTaskPage extends StatefulWidget {
   const EditTaskPage({super.key});
 
   @override
-  _EditTaskPageState createState() => _EditTaskPageState();
+  _AddTaskPageState createState() => _AddTaskPageState();
 }
 
-class _EditTaskPageState extends State<EditTaskPage> {
+class _AddTaskPageState extends State<EditTaskPage> {
   final TextEditingController _startDateController = TextEditingController();
   final TextEditingController _endDateController = TextEditingController();
+  List<Category> selectedCategories = [];
+  List<User> selectedUsers = [];
+  List<Category> _categories = [];
+
+  void _handleCategorySelected(Category category) {
+    setState(() {
+      if (!_selectedCategories.contains(category)) {
+        _selectedCategories.add(category);
+      }
+    });
+  }
+
+  void _handleCategoryRemoved(Category category) {
+    setState(() {
+      _selectedCategories.remove(category);
+    });
+  }
+
+  List<Category> _selectedCategories = [];
+  void _onCategorySelected(Category category) {
+    setState(() {
+      if (_selectedCategories.contains(category)) {
+        _selectedCategories.remove(category);
+      } else {
+        _selectedCategories.add(category);
+      }
+    });
+  }
 
   Future<void> _selectDate(BuildContext context, TextEditingController controller) async {
     final DateTime? picked = await showDatePicker(
@@ -46,31 +76,34 @@ class _EditTaskPageState extends State<EditTaskPage> {
         backgroundColor: const Color(0xFFF5F5F7),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(
-          left: 32, 
-          right: 32,
-          top: 16,
-          bottom: 16
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               const TaskName(),
-              const SizedBox(height: 16),
+              const SizedBox(height: 20),
               const TaskDescription(),
-              const SizedBox(height: 16),
+              const SizedBox(height: 32),
               dates(context),
-              const SizedBox(height: 16),
+              const SizedBox(height: 20),
               const TaskPriority(),
-              const SizedBox(height: 16),
-              // buraya kategori gelecek
-              // SizedBox(height: 16),
-              // buraya kişiler gelecek
-              // SizedBox(height: 16),
+              const SizedBox(height: 20),
+              const Padding(
+                padding: EdgeInsets.only(left: 8.0),
+                child: Text(
+                  'Kategoriler',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ),
+              SelectableCategoryRow(
+                categories: _categories,
+                onCategorySelected: _handleCategorySelected,
+              ),
+              const SizedBox(height: 20),
               const ProgressandStatus(),
-              const SizedBox(height: 32), 
-              saveButton(context),
+              const SizedBox(height: 40), 
+              editButton(context),
             ],
           ),
         ),
@@ -160,7 +193,7 @@ class _EditTaskPageState extends State<EditTaskPage> {
     );
   }
 
-  Center saveButton(BuildContext context) {
+  Center editButton(BuildContext context) {
     return Center(
       child: SizedBox(
         width: double.infinity,
@@ -182,14 +215,14 @@ class _EditTaskPageState extends State<EditTaskPage> {
           ),
           child: ElevatedButton(
             onPressed: () {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const TasksPage()));
+              Navigator.pushReplacementNamed(context, '/taskdetails');
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.transparent,
               shadowColor: Colors.transparent,
               padding: const EdgeInsets.symmetric(vertical: 16),
             ),
-            child: const Text('Kaydet', 
+            child: const Text('Düzenle', 
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -321,6 +354,23 @@ class TaskPriority extends StatefulWidget {
 class _TaskPriorityState extends State<TaskPriority> {
   int selectedIndex = -1; // başlangıçta hiçbir seçenek seçilmemiş olacak
 
+  // Öncelik seviyesine göre renkleri tanımlıyoruz
+  Color getButtonColor(int index) {
+    if (selectedIndex == index) {
+      switch (index) {
+        case 0:
+          return Colors.lightGreen.withOpacity(0.6); // Düşük: Açık yeşil
+        case 1:
+          return Colors.orange.withOpacity(0.6); // Orta: Açık turuncu
+        case 2:
+          return Colors.redAccent.withOpacity(0.6); // Yüksek: Açık kırmızı
+        default:
+          return Colors.white;
+      }
+    }
+    return Colors.white; // Seçilmeyen butonun rengi
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -361,20 +411,18 @@ class _TaskPriorityState extends State<TaskPriority> {
                   child: Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: selectedIndex == index
-                          ? const Color(0xFFE47000).withOpacity(0.6) // seçilen butonun rengi
-                          : Colors.white, // seçilmeyen butonun rengi
+                      color: getButtonColor(index), // Seçilen butona göre renk değişiyor
                       borderRadius: index == 0
+                        ? const BorderRadius.only(
+                          topLeft: Radius.circular(12),
+                          bottomLeft: Radius.circular(12),
+                        )
+                        : index == 2
                           ? const BorderRadius.only(
-                              topLeft: Radius.circular(12),
-                              bottomLeft: Radius.circular(12),
+                              topRight: Radius.circular(12),
+                              bottomRight: Radius.circular(12),
                             )
-                          : index == 2
-                              ? const BorderRadius.only(
-                                  topRight: Radius.circular(12),
-                                  bottomRight: Radius.circular(12),
-                                )
-                              : null,
+                          : null,
                     ),
                     child: Center(
                       child: Text(
@@ -518,7 +566,7 @@ class _ProgressandStatusState extends State<ProgressandStatus> {
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     color: isStatusSelected 
-                    ? const Color(0xFFE47000).withOpacity(0.6) 
+                    ? Colors.blue[200]
                     : Colors.white,
                     boxShadow: [
                       BoxShadow(
