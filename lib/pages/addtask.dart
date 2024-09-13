@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:taskmanagerapp/models/userinfos.dart';
 import 'package:taskmanagerapp/models/category.dart';
 import 'package:taskmanagerapp/widgets/selectableitemrow.dart';
+import 'package:taskmanagerapp/widgets/selectablecategoryrow.dart';
 
 // düzenleme sayfasının boş hali olacak
 
@@ -18,6 +19,32 @@ class _AddTaskPageState extends State<AddTaskPage> {
   final TextEditingController _endDateController = TextEditingController();
   List<Category> selectedCategories = [];
   List<User> selectedUsers = [];
+  List<Category> _categories = [];
+
+  void _handleCategorySelected(Category category) {
+    setState(() {
+      if (!_selectedCategories.contains(category)) {
+        _selectedCategories.add(category);
+      }
+    });
+  }
+
+  void _handleCategoryRemoved(Category category) {
+    setState(() {
+      _selectedCategories.remove(category);
+    });
+  }
+
+  List<Category> _selectedCategories = [];
+  void _onCategorySelected(Category category) {
+    setState(() {
+      if (_selectedCategories.contains(category)) {
+        _selectedCategories.remove(category);
+      } else {
+        _selectedCategories.add(category);
+      }
+    });
+  }
 
   Future<void> _selectDate(BuildContext context, TextEditingController controller) async {
     final DateTime? picked = await showDatePicker(
@@ -63,49 +90,27 @@ class _AddTaskPageState extends State<AddTaskPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               const TaskName(),
-              const SizedBox(height: 16),
+              const SizedBox(height: 20),
               const TaskDescription(),
-              const SizedBox(height: 16),
+              const SizedBox(height: 32),
               dates(context),
-              const SizedBox(height: 16),
+              const SizedBox(height: 20),
               const TaskPriority(),
-              const SizedBox(height: 16),
-              SelectableItemRow<Category>(
-                title: 'Kategori Seç',
-                items: categories,
-                selectedItems: selectedCategories,
-                onItemSelected: (Category category) {
-                  setState(() {
-                    selectedCategories.add(category);
-                  });
-                },
-                onItemRemoved: (Category category) {
-                  setState(() {
-                    selectedCategories.remove(category);
-                  });
-                },
-                allowAddingNew: true,
+              const SizedBox(height: 20),
+              const Padding(
+                padding: EdgeInsets.only(left: 8.0),
+                child: Text(
+                  'Kategoriler',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
               ),
-              const SizedBox(height: 16),
-              SelectableItemRow<User>(
-                title: 'Kişi Seç',
-                items: users,
-                selectedItems: selectedUsers,
-                onItemSelected: (User user) {
-                  setState(() {
-                    selectedUsers.add(user);
-                  });
-                },
-                onItemRemoved: (User user) {
-                  setState(() {
-                    selectedUsers.remove(user);
-                  });
-                },
-                allowAddingNew: false,
+              SelectableCategoryRow(
+                categories: _categories,
+                onCategorySelected: _handleCategorySelected,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 20),
               const ProgressandStatus(),
-              const SizedBox(height: 32), 
+              const SizedBox(height: 40), 
               addButton(context),
             ],
           ),
